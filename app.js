@@ -3,11 +3,12 @@ const app = express();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 
+const licitacaoRoutes = require('./api/routes/licitacoes');
 const productRoutes = require('./api/routes/products');
 const orderRoutes = require('./api/routes/orders');
 
 mongoose.connect("mongodb+srv://admin:" +
-    process.env.MONGO_ATLAS_PW + "@cluster0.v6cau.mongodb.net/licitacao?retryWrites=true&w=majority", {
+    process.env.MONGO_ATLAS_PW + "@cluster0.tnm7o.mongodb.net/licitacao?retryWrites=true&w=majority", {
         useNewUrlParser: true,
         useUnifiedTopology: true
     });
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use('/licitacoes', licitacaoRoutes);
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
 
